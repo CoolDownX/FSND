@@ -239,6 +239,17 @@ def create_app(test_config=None):
       })
 
   #
+  # Route for 400 Error
+  #
+  @app.errorhandler(400)
+  def bad_request(error):
+      return jsonify({
+        "success": False, 
+        "error": 400,
+        "message": "bad request"
+      }), 400
+
+  #
   # Route for 404 Error
   #
   @app.errorhandler(404)
@@ -248,6 +259,17 @@ def create_app(test_config=None):
       "error": 404,
       "message": "resource not found"
     }), 404
+
+  #
+  # Route for 405 Error
+  #
+  @app.errorhandler(405)
+  def not_found(error):
+    return jsonify({
+      "success": False, 
+      "error": 405,
+      "message": "Method not allowed"
+    }), 405
 
   #
   # Route for 422 Error
@@ -261,14 +283,14 @@ def create_app(test_config=None):
       }), 422
 
   #
-  # Route for 400 Error
+  # Route for 500 Error
   #
-  @app.errorhandler(400)
-  def bad_request(error):
+  @app.errorhandler(500)
+  def internal_server_error(error):
       return jsonify({
         "success": False, 
-        "error": 400,
-        "message": "bad request"
+        "error": 500,
+        "message": "Internal Server error"
       }), 400
 
   return app
