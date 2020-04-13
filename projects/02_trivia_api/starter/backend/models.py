@@ -4,8 +4,8 @@ from flask_sqlalchemy import SQLAlchemy
 import json
 
 
-database_user = "Dominik"
-database_pw = "test"
+database_user = "postgres"
+database_pw = "postgres"
 database_host = "localhost:5432"
 database_name = "trivia"
 
