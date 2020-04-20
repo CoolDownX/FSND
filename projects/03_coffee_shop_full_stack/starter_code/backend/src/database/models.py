@@ -3,9 +3,12 @@ from sqlalchemy import Column, String, Integer
 from flask_sqlalchemy import SQLAlchemy
 import json
 
-database_filename = "database.db"
-project_dir = os.path.dirname(os.path.abspath(__file__))
-database_path = "sqlite:///{}".format(os.path.join(project_dir, database_filename))
+database_user = "Dominik"
+database_pw = "test"
+database_host = "localhost:5432"
+database_name = "CoffeeShop"
+
+database_path = "postgres://{}:{}@{}/{}".format(database_user, database_pw, database_host, database_name)
 
 db = SQLAlchemy()
 
@@ -18,6 +21,7 @@ def setup_db(app):
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
     db.init_app(app)
+    db.create_all()
 
 '''
 db_drop_and_create_all()
@@ -35,7 +39,7 @@ a persistent drink entity, extends the base SQLAlchemy Model
 '''
 class Drink(db.Model):
     # Autoincrementing, unique primary key
-    id = Column(Integer().with_variant(Integer, "sqlite"), primary_key=True)
+    id = Column(Integer().with_variant(Integer, "postgres"), primary_key=True)
     # String Title
     title = Column(String(80), unique=True)
     # the ingredients blob - this stores a lazy json blob
@@ -53,6 +57,16 @@ class Drink(db.Model):
             'id': self.id,
             'title': self.title,
             'recipe': short_recipe
+        }
+
+    '''
+    format()
+        format db query as json
+    '''
+    def format(self):
+        return {
+            'id': self.id,
+            'title': self.title,
         }
 
     '''
