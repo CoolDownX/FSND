@@ -3,10 +3,10 @@ from sqlalchemy import Column, String, Integer
 from flask_sqlalchemy import SQLAlchemy
 import json
 
-database_user = "Dominik"
-database_pw = "test"
-database_host = "localhost:5432"
-database_name = "CoffeeShop"
+database_user = "Your_User"
+database_pw = "Your_PW"
+database_host = "Your_host"
+database_name = "Your_Database"
 
 database_path = "postgres://{}:{}@{}/{}".format(database_user, database_pw, database_host, database_name)
 

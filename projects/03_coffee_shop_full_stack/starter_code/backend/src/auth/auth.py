@@ -5,9 +5,9 @@ from jose import jwt
 from urllib.request import urlopen
 
 
-AUTH0_DOMAIN = 'cooldownx.eu.auth0.com'
+AUTH0_DOMAIN = 'yourDomain.auth0.com'
 ALGORITHMS = ['RS256']
-API_AUDIENCE = 'CoffeeShop'
+API_AUDIENCE = 'YourAudience'
 
 ## AuthError Exception
 '''
@@ -140,7 +140,7 @@ def verify_decode_jwt(token):
                 'code': 'invalid_header',
                 'description': 'Unable to find the appropriate key.'
             }, 400)
-            
+
     raise Exception('Not Implemented')
 
 '''
